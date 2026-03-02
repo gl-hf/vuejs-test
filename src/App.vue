@@ -1,9 +1,17 @@
 <script setup lang="ts">
+import { supabase } from '@/lib/supabaseClient'
 
+console.log(supabase)
 </script>
 
 <template>
-  <h1>Welcome</h1>
+  <main>
+    <RouterView />
+  </main>
 </template>
 
-<style scoped></style>
+<style>
+* {
+  background-color: bisque;
+}
+</style>
