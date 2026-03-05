@@ -1,40 +1,14 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { supabase } from '@/lib/supabaseClient'
-
-// Описываем структуру проекта, чтобы TypeScript не ругался
-interface Project {
-  id: number
-  name: string
-  slug: string
-  status: string
-  created_at: string
-}
-
-const projects = ref<Project[]>([])
-
-onMounted(async () => {
-  // Запрашиваем данные из таблицы 'projects'
-  const { data, error } = await supabase.from('projects').select('*')
-
-  if (error) {
-    console.error('❌ Ошибка запроса к Supabase:', error.message)
-  } else {
-    console.log('✅ База работает! Получено проектов:', data?.length)
-    projects.value = data || []
-  }
-})
+import TopNavBar from './components/Layout/TopNavBar.vue'
+import SideBar from './components/Layout/SideBar.vue'
 </script>
 
 <template>
-  <main>
-    <RouterView />
-  </main>
+  <SideBar />
+  <div class="flex flex-col lg:ml-52 ml-16 transition-[margin]">
+    <TopNavBar />
+    <main>
+      <RouterView />
+    </main>
+  </div>
 </template>
-
-<style>
-body {
-  margin: 0;
-  font-family: sans-serif;
-}
-</style>
